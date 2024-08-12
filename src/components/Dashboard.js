@@ -11,19 +11,19 @@ const Dashboard = ({ setBannerData }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8081/api/banner")
+      .get("https://tuf-swe-backend.onrender.com/api/banner")
       .then((response) => setBanner(response.data))
       .catch((error) => console.error(error));
   }, []);
 
   const handleUpdate = () => {
     axios
-      .post("http://localhost:8081/api/banner", banner)
+      .post("https://tuf-swe-backend.onrender.com/api/banner", banner)
       .then(() => {
         alert("Banner updated");
         // Refresh banner data in the App component
         axios
-          .get("http://localhost:8081/api/banner")
+          .get("https://tuf-swe-backend.onrender.com/api/banner")
           .then((response) => setBannerData(response.data))
           .catch((error) => console.error(error));
       })

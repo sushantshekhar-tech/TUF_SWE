@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8081/api/banner")
+      .get("https://tuf-swe-backend.onrender.com/api/banner")
       .then((response) => setBannerData(response.data))
       .catch((error) => console.error(error));
   }, []);
