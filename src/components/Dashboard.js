@@ -1,30 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Dashboard = ({ setBannerData }) => {
   const [banner, setBanner] = useState({
-    description: '',
+    description: "",
     timer: 0,
-    link: '',
-    visible: false
+    link: "",
+    visible: false,
   });
 
   useEffect(() => {
-    axios.get('http://localhost:8081/api/banner')
-      .then(response => setBanner(response.data))
-      .catch(error => console.error(error));
+    axios
+      .get("http://localhost:8081/api/banner")
+      .then((response) => setBanner(response.data))
+      .catch((error) => console.error(error));
   }, []);
 
   const handleUpdate = () => {
-    axios.post('http://localhost:8081/api/banner', banner)
+    axios
+      .post("http://localhost:8081/api/banner", banner)
       .then(() => {
-        alert('Banner updated');
+        alert("Banner updated");
         // Refresh banner data in the App component
-        axios.get('http://localhost:8081/api/banner')
-          .then(response => setBannerData(response.data))
-          .catch(error => console.error(error));
+        axios
+          .get("http://localhost:8081/api/banner")
+          .then((response) => setBannerData(response.data))
+          .catch((error) => console.error(error));
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -37,7 +40,9 @@ const Dashboard = ({ setBannerData }) => {
             type="text"
             className="form-control"
             value={banner.description}
-            onChange={e => setBanner({ ...banner, description: e.target.value })}
+            onChange={(e) =>
+              setBanner({ ...banner, description: e.target.value })
+            }
           />
         </div>
         <div className="form-group">
@@ -46,7 +51,9 @@ const Dashboard = ({ setBannerData }) => {
             type="number"
             className="form-control"
             value={banner.timer}
-            onChange={e => setBanner({ ...banner, timer: parseInt(e.target.value, 10) })}
+            onChange={(e) =>
+              setBanner({ ...banner, timer: parseInt(e.target.value, 10) })
+            }
           />
         </div>
         <div className="form-group">
@@ -55,7 +62,7 @@ const Dashboard = ({ setBannerData }) => {
             type="text"
             className="form-control"
             value={banner.link}
-            onChange={e => setBanner({ ...banner, link: e.target.value })}
+            onChange={(e) => setBanner({ ...banner, link: e.target.value })}
           />
         </div>
         <div className="form-check mb-3">
@@ -63,11 +70,19 @@ const Dashboard = ({ setBannerData }) => {
             type="checkbox"
             className="form-check-input"
             checked={banner.visible}
-            onChange={e => setBanner({ ...banner, visible: e.target.checked })}
+            onChange={(e) =>
+              setBanner({ ...banner, visible: e.target.checked })
+            }
           />
           <label className="form-check-label">Visible</label>
         </div>
-        <button type="button" className="btn btn-primary" onClick={handleUpdate}>Update Banner</button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={handleUpdate}
+        >
+          Update Banner
+        </button>
       </form>
     </div>
   );
